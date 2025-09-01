@@ -1,0 +1,100 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+
+%ola 
+%----- Configuración del estilo del documento------%
+\usepackage{epsfig,graphicx}
+\usepackage[left=2.5cm,right=2.5cm,top=1.8cm,bottom=2.3cm]{geometry}
+%------ Paquetes matematicos --------%
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{tabularx}
+\usepackage[numbers]{natbib}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{verbatim}
+\usepackage[shortlabels]{enumitem}
+\usepackage{venndiagram}
+\usepackage{xcolor}
+\usetikzlibrary{shapes.geometric}
+\renewcommand{\proofname}{Demostración}
+\usepackage{cancel}
+\usepackage{hyperref}
+
+%%Para la portada
+%\usepackage[top=1in, left=0.9in, right=1.25in, bottom=1in]{geometry}
+%\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,es-nodecimaldot,es-tabla]{babel}
+\usepackage{graphicx}
+\usepackage{tocloft}
+\graphicspath{{./figs/}}
+\usepackage{setspace}
+
+% Paquete para codigo 
+\usepackage{minted}
+
+%Color bibi
+\definecolor{bibi}{RGB}{0,103,148}
+% Otros colores
+
+\begin{document}
+	
+    \input{portada.tex}
+    
+    \begin{center}
+	\section*{\LARGE{Practica 1}}
+    \end{center}
+
+    \begin{center}
+        \LARGE{\textbf{Introducción}}\\
+    \end{center}
+    \normalsize
+    \input{intro.tex}
+
+    
+    \begin{center}
+        \LARGE{\textbf{Desarrollo - Descifrado de archivos}}\\
+    \end{center}
+    \normalsize
+    \begin{enumerate}
+        \item \input{archivo/1}
+        \item \input{archivo/2}
+        \item \input{archivo/3}
+        \item \input{archivo/4}
+    \end{enumerate}
+    
+
+    \begin{center}
+        \LARGE{\textbf{Desarrollo - preguntas}}\\
+    \end{center}
+    \normalsize
+    \begin{enumerate}
+        \item \input{Conceptos_generales/pregunta1}
+        \item \input{Conceptos_generales/pregunta2}
+        \item \input{Conceptos_generales/pregunta3}
+        \item \input{Conceptos_generales/pregunta4}
+        \item \input{Conceptos_generales/pregunta5}
+        \item \input{Conceptos_generales/pregunta6}
+    \end{enumerate}
+
+    \begin{center}
+        \LARGE{\textbf{Conclusiones}}\\
+    \end{center}
+    \normalsize
+    \input{conclusiones.tex}
+
+    
+\newpage
+
+\Large \section*{Bibliografía}
+  \bibliography{resources/referencias/referencias}
+  \bibliographystyle{plainnat}
+  
+    
+	
+
+\end{document}
