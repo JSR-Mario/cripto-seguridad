@@ -1,0 +1,40 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{base64\PYGZus{}decode\PYGZus{}from\PYGZus{}scratch}\PYG{p}{(}\PYG{n}{s}\PYG{p}{)}\PYG{p}{:}
+\PYG{+w}{  }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{  Decodificador base64 desde cero.}
+\PYG{l+s+sd}{  Acepta s como str (puede contener espacios/newlines).}
+\PYG{l+s+sd}{  Devuelve bytes decodificados.}
+\PYG{l+s+sd}{  \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+  \PYG{c+c1}{\PYGZsh{} Mantener solo chars válidos + \PYGZsq{}=\PYGZsq{}}
+  \PYG{n}{s} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n}{ch} \PYG{k}{for} \PYG{n}{ch} \PYG{o+ow}{in} \PYG{n}{s} \PYG{k}{if} \PYG{n}{ch} \PYG{o+ow}{in} \PYG{n}{\PYGZus{}b64chars} \PYG{o+ow}{or} \PYG{n}{ch} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+  \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{s}\PYG{p}{:}
+      \PYG{k}{return} \PYG{l+s+sa}{b}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsq{}}
+  \PYG{c+c1}{\PYGZsh{} Si la longitud no es múltiplo de 4, rellenar con \PYGZsq{}=\PYGZsq{}}
+  \PYG{n}{pad\PYGZus{}len} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{4} \PYG{o}{\PYGZhy{}} \PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{s}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{)} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{4}
+  \PYG{k}{if} \PYG{n}{pad\PYGZus{}len}\PYG{p}{:}
+      \PYG{n}{s} \PYG{o}{+}\PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{=}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{*} \PYG{n}{pad\PYGZus{}len}
+
+  \PYG{n}{out} \PYG{o}{=} \PYG{n+nb}{bytearray}\PYG{p}{(}\PYG{p}{)}
+  \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{s}\PYG{p}{)}\PYG{p}{,} \PYG{l+m+mi}{4}\PYG{p}{)}\PYG{p}{:}
+      \PYG{n}{block} \PYG{o}{=} \PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{p}{:}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{4}\PYG{p}{]}
+      \PYG{n}{vals} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+      \PYG{n}{pad} \PYG{o}{=} \PYG{l+m+mi}{0}
+      \PYG{k}{for} \PYG{n}{ch} \PYG{o+ow}{in} \PYG{n}{block}\PYG{p}{:}
+          \PYG{k}{if} \PYG{n}{ch} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}
+              \PYG{n}{vals}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{)}
+              \PYG{n}{pad} \PYG{o}{+}\PYG{o}{=} \PYG{l+m+mi}{1}
+          \PYG{k}{else}\PYG{p}{:}
+              \PYG{c+c1}{\PYGZsh{} Asumir \PYGZsq{}A\PYGZsq{} (valor 0) si char inválido}
+              \PYG{n}{vals}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{\PYGZus{}b64rev}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{n}{ch}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{)}\PYG{p}{)}
+      \PYG{c+c1}{\PYGZsh{} recomponer 24 bits}
+      \PYG{n}{triple} \PYG{o}{=} \PYG{p}{(}\PYG{n}{vals}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+m+mi}{18}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{vals}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+m+mi}{12}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{vals}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{\PYGZlt{}\PYGZlt{}} \PYG{l+m+mi}{6}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{vals}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]}\PYG{p}{)}
+      \PYG{n}{b1} \PYG{o}{=} \PYG{p}{(}\PYG{n}{triple} \PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{l+m+mi}{16}\PYG{p}{)} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0xFF}
+      \PYG{n}{b2} \PYG{o}{=} \PYG{p}{(}\PYG{n}{triple} \PYG{o}{\PYGZgt{}\PYGZgt{}} \PYG{l+m+mi}{8}\PYG{p}{)} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0xFF}
+      \PYG{n}{b3} \PYG{o}{=} \PYG{n}{triple} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0xFF}
+      \PYG{n}{out}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{b1}\PYG{p}{)}
+      \PYG{k}{if} \PYG{n}{pad} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{2}\PYG{p}{:}
+          \PYG{n}{out}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{b2}\PYG{p}{)}
+      \PYG{k}{if} \PYG{n}{pad} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{:}
+          \PYG{n}{out}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{b3}\PYG{p}{)}
+  \PYG{k}{return} \PYG{n+nb}{bytes}\PYG{p}{(}\PYG{n}{out}\PYG{p}{)}
+\end{MintedVerbatim}

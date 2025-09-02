@@ -1,0 +1,24 @@
+\textbf{Descifrar el archivo file4.lol}
+\begin{quote}
+    Para el archivo \texttt{file4.lol} se comenzó con la ver sus primeros bytes,
+    tanto en ASCII como en hexadecimal. A diferencia de un binario “puro”, el contenido
+    estaba conformado exclusivamente por caracteres válidos de Base64 (\texttt{A–Z},
+    \texttt{a–z}, \texttt{0–9}, \texttt{+}, \texttt{/} y posibles \texttt{=} de relleno), distribuidos
+    como texto. Esto sugirió una \textbf{codificación Base64} más que un cifrado clásico.
+
+    Primero se descartaron los cifrados \textbf{César} y \textbf{Afín} aplicados \emph{byte a byte}:
+    al intentar alinear el encabezado descifrado con firmas conocidas (PNG, PDF, MP3, MP4),
+    no se encontró un desplazamiento constante (César) ni un par $(a,b)$ (Afín) que explicara
+    coherentemente varios bytes de una misma firma. Con ello, se procedió a decodificar
+    en Base64.
+
+    Tras la \textbf{decodificación Base64}, se verificó el encabezado del binario resultante contra
+    los \emph{magic bytes} conocidos. Los primeros cinco bytes fueron:
+    \[
+      \texttt{25\ 50\ 44\ 46\ 2D} \quad (\texttt{\%PDF-}),
+    \]
+    que corresponden inequívocamente al formato \textbf{PDF}. Esto confirmó que el archivo
+    original era un documento \texttt{.pdf}.
+
+\end{quote}
+\vspace{.5cm}

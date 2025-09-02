@@ -1,0 +1,43 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} 1) bytes del head en base 64}
+\PYG{n}{only\PYGZus{}b64} \PYG{o}{=} \PYG{n+nb}{all}\PYG{p}{(}\PYG{p}{(}\PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{B64\PYGZus{}CHARS\PYGZus{}WITH\PYGZus{}NL}\PYG{p}{)} \PYG{k}{for} \PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{head}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{1) Bytes de head en b64?}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{only\PYGZus{}b64}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} 2) padding con =}
+\PYG{n}{has\PYGZus{}eq} \PYG{o}{=} \PYG{l+s+sa}{b}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{=}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o+ow}{in} \PYG{n}{raw}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{16}\PYG{p}{:}\PYG{p}{]} \PYG{o+ow}{or} \PYG{l+s+sa}{b}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{=}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o+ow}{in} \PYG{n}{raw} \PYG{o+ow}{or} \PYG{n}{raw}\PYG{o}{.}\PYG{n}{rstrip}\PYG{p}{(}\PYG{p}{)}\PYG{o}{.}\PYG{n}{endswith}\PYG{p}{(}\PYG{l+s+sa}{b}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{2) Padding con =:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{has\PYGZus{}eq}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} 3) contar caracteres en ASCII}
+\PYG{n}{visible\PYGZus{}chars} \PYG{o}{=} \PYG{p}{[}\PYG{n}{c} \PYG{k}{for} \PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{head} \PYG{k}{if} \PYG{l+m+mi}{32} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n}{c} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{127} \PYG{o+ow}{or} \PYG{n}{c} \PYG{o+ow}{in} \PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{l+m+mi}{13}\PYG{p}{)}\PYG{p}{]}
+\PYG{k}{if} \PYG{n}{visible\PYGZus{}chars}\PYG{p}{:}
+    \PYG{n}{b64\PYGZus{}count} \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{k}{for} \PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{visible\PYGZus{}chars} \PYG{k}{if} \PYG{n}{c} \PYG{o+ow}{in} \PYG{n}{B64\PYGZus{}STD} \PYG{o+ow}{or} \PYG{n}{c} \PYG{o+ow}{in} \PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{l+m+mi}{13}\PYG{p}{)}\PYG{p}{)}
+    \PYG{n}{frac} \PYG{o}{=} \PYG{n}{b64\PYGZus{}count} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{visible\PYGZus{}chars}\PYG{p}{)}
+\PYG{k}{else}\PYG{p}{:}
+    \PYG{n}{frac} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{3) Fraccion de contenido que es ASCII: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{frac}\PYG{l+s+si}{:}\PYG{l+s+s2}{.3f}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} 4) Medir porcentaje de lineas longitud 4}
+\PYG{n}{lines} \PYG{o}{=} \PYG{n}{ascii\PYGZus{}preview}\PYG{p}{(}\PYG{n}{raw}\PYG{p}{,} \PYG{l+m+mi}{4096}\PYG{p}{)}\PYG{o}{.}\PYG{n}{splitlines}\PYG{p}{(}\PYG{p}{)}
+\PYG{k}{if} \PYG{n}{lines}\PYG{p}{:}
+    \PYG{n}{lengths} \PYG{o}{=} \PYG{p}{[}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{l}\PYG{p}{)} \PYG{k}{for} \PYG{n}{l} \PYG{o+ow}{in} \PYG{n}{lines} \PYG{k}{if} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{l}\PYG{o}{.}\PYG{n}{strip}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{]}
+    \PYG{k}{if} \PYG{n}{lengths}\PYG{p}{:}
+        \PYG{n}{multiples\PYGZus{}of\PYGZus{}4} \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{l+m+mi}{1} \PYG{k}{for} \PYG{n}{L} \PYG{o+ow}{in} \PYG{n}{lengths} \PYG{k}{if} \PYG{n}{L} \PYG{o}{\PYGZpc{}} \PYG{l+m+mi}{4} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{pct\PYGZus{}mult4} \PYG{o}{=} \PYG{n}{multiples\PYGZus{}of\PYGZus{}4} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{lengths}\PYG{p}{)}
+    \PYG{k}{else}\PYG{p}{:}
+        \PYG{n}{pct\PYGZus{}mult4} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+\PYG{k}{else}\PYG{p}{:}
+    \PYG{n}{pct\PYGZus{}mult4} \PYG{o}{=} \PYG{l+m+mf}{0.0}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{4) Medir porcentaje de lineas longitud 4: }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{pct\PYGZus{}mult4}\PYG{l+s+si}{:}\PYG{l+s+s2}{.3f}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} 5) Buscar firmas de formatos binarios}
+\PYG{n}{signs} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+\PYG{k}{if} \PYG{n}{raw}\PYG{o}{.}\PYG{n}{startswith}\PYG{p}{(}\PYG{l+s+sa}{b}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{\PYGZpc{}}\PYG{l+s+s2}{PDF}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{signs}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{PDF}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{if} \PYG{n}{raw}\PYG{o}{.}\PYG{n}{startswith}\PYG{p}{(}\PYG{l+s+sa}{b}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}x89}\PYG{l+s+s2}{PNG}\PYG{l+s+se}{\PYGZbs{}r}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+se}{\PYGZbs{}x1a}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{signs}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{PNG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{if} \PYG{n}{raw}\PYG{o}{.}\PYG{n}{startswith}\PYG{p}{(}\PYG{l+s+sa}{b}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}xff}\PYG{l+s+se}{\PYGZbs{}xd8}\PYG{l+s+se}{\PYGZbs{}xff}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{signs}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{JPEG}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{k}{if} \PYG{n}{raw}\PYG{o}{.}\PYG{n}{startswith}\PYG{p}{(}\PYG{l+s+sa}{b}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{PK}\PYG{l+s+se}{\PYGZbs{}x03}\PYG{l+s+se}{\PYGZbs{}x04}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}\PYG{p}{:}
+    \PYG{n}{signs}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ZIP}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{5) Firmas de formatos binarios en el inicio:}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{signs} \PYG{k}{if} \PYG{n}{signs} \PYG{k}{else} \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{False}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{MintedVerbatim}
