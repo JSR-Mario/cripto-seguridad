@@ -1,1 +1,3 @@
-\textbf{}
+\textbf{¿Por qué el sistema de archivos de UNIX, aunque un archivo tenga una extensión diferente (o incluso no tenga), sigue reconociendo al archivo original?}\\
+
+Porque el sistema de archivos de UNIX identifica el tipo de archivo por su contenido interno, especialmente por los magic bytes, no por la extensión, por ejemplo, los archivos \textbf{.png} empieza con los bytes \textbf{89 50 4E 47 0D 0A 1A 0A}, y un archivo \textbf{.pdf} empieza con \textbf{\%PDF}. Por esto cuando se utiliza \textbf{file} en UNIX, el comando lee los primeros bytes para determinar el formato del archivo.
