@@ -1,1 +1,31 @@
-\textbf{}
+\textbf{Sea $f: \mathbb{Z}_n \rightarrow \mathbb{Z}_n$ tal que $f(i)=k * i$ para $i \in A$ con $A$ un alfabeto cualquiera ?`qu\'e se debe de cumplir para que $f$ sea una funci\'on biyectiva?}\\\\
+Tenemos la función  
+\[
+f:\mathbb{Z}_n \to \mathbb{Z}_n, \quad f(i)=k \cdot i \pmod n
+\]
+donde \(\mathbb{Z}_n\) son los enteros módulo \(n\) (los números \(0,1,2,\dots,n-1\)), y \(k\) es un número fijo.  
+\\\\
+Para que \(f\) sea biyectiva debemos de cumplir dos cosas:\\  
+1. Inyectiva: que no haya dos elementos distintos que se manden al mismo resultado.\\  
+2. Sobreyectiva: que todos los elementos de \(\mathbb{Z}_n\) se puedan obtener como imagen de alguno.  
+\\\\
+Es un conjunto finito, sol debemos de revisar la inyectividad: si la función no repite valores, entonces será sobreyectiva.  
+\\\\\\  
+Si tomamos dos elementos \(i\) y \(j\) y resulta que \(f(i) = f(j)\), entonces
+\[
+k \cdot i \equiv k \cdot j \pmod{n}.
+\]
+Esto se simplifica a  
+\[
+k \cdot (i-j) \equiv 0 \pmod{n}.
+\]
+Lo que significa que \(n\) divide a \(k \cdot (i-j)\).  
+\\\\
+Aquí aparece el máximo común divisor \(\gcd(k,n)\):\\  
+- Si \(\gcd(k,n) = d > 1\), entonces es posible que \(i \neq j\) pero aún así \(k(i-j)\) sea múltiplo de \(n\). En este caso la función no es inyectiva.  \\
+- Si \(\gcd(k,n)=1\), no hay divisores comunes, y la única forma de que \(k(i-j)\) sea múltiplo de \(n\) es que \(i-j\) lo sea. Es decir, si \(i\neq j\), sus imágenes no se confunden.  \\
+En conclusión, la función $f(i) = k \cdot i \pmod{n}$ es biyectiva si y sólo si
+\[
+\gcd(k,n) = 1.
+\]
+\citep{lec_7_handout}
