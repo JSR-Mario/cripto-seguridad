@@ -1,0 +1,11 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def}\PYG{+w}{ }\PYG{n+nf}{ascii\PYGZus{}preview}\PYG{p}{(}\PYG{n}{b}\PYG{p}{,} \PYG{n}{length}\PYG{o}{=}\PYG{l+m+mi}{512}\PYG{p}{)}\PYG{p}{:}
+  \PYG{n}{s} \PYG{o}{=} \PYG{n}{b}\PYG{p}{[}\PYG{p}{:}\PYG{n}{length}\PYG{p}{]}
+  \PYG{n}{txt} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{n+nb}{chr}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{k}{if} \PYG{l+m+mi}{32} \PYG{o}{\PYGZlt{}}\PYG{o}{=} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{127} \PYG{o+ow}{or} \PYG{n}{x} \PYG{o+ow}{in} \PYG{p}{(}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{l+m+mi}{13}\PYG{p}{)} \PYG{k}{else} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{.}\PYG{l+s+s1}{\PYGZsq{}} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{s}\PYG{p}{)}
+  \PYG{k}{return} \PYG{n}{txt}
+
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{=== ASCII preview}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{ascii\PYGZus{}preview}\PYG{p}{(}\PYG{n}{head}\PYG{p}{,} \PYG{l+m+mi}{512}\PYG{p}{)}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{=== Hex ===}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ }\PYG{l+s+s1}{\PYGZsq{}}\PYG{o}{.}\PYG{n}{join}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+si}{\PYGZob{}}\PYG{n}{x}\PYG{l+s+si}{:}\PYG{l+s+s2}{02x}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{head}\PYG{p}{[}\PYG{p}{:}\PYG{l+m+mi}{128}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
+\end{MintedVerbatim}

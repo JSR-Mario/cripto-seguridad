@@ -1,0 +1,30 @@
+\textbf{Descifrar el archivo file2.lol}
+\begin{quote}
+    Al abordar el archivo \texttt{file2.lol}, se veían sus primeros bytes
+    en ASCII y en hexadecimal. El contenido no presentaba texto comprensible, por lo que se
+    asumió que se trataba de un cifrado clásico aplicado \emph{byte a byte} en $Z_{256}$.
+
+    Para automatizar el proceso, se hizo un programa que, a partir del encabezado,
+    prueba sistemáticamente los cifrados \textbf{César} y \textbf{Afín} sobre los \emph{magic bytes}
+    de varios formatos (PDF, PNG, MP3, MP4). La estrategia consiste en buscar un
+    desplazamiento (en el caso de César) o un par $(a,b)$ (en el caso afín) que haga
+    coincidir el encabezado descifrado con las firmas típicas de archivo.
+
+    En particular, para \textbf{César} se verifica si existe un \emph{shift} constante $s$ tal que
+    para todos los bytes del encabezado se cumpla:
+    \[
+      c_i \equiv p_i + s \pmod{256},
+    \]
+    donde $p_i$ son los bytes de la firma conocida (por ejemplo, PNG) y $c_i$ los bytes
+    observados en el archivo cifrado. Si ese mismo $s$ explica todos los bytes probados,
+    se considera una detección positiva y se procede a descifrar con:
+    \[
+      p_i \equiv c_i - s \pmod{256}.
+    \]
+
+
+    
+    Finalmente, se guardó el binario descifrado con extensión \texttt{.png} y se verificó su
+    apertura correcta con un visor de imágenes, validando el éxito del proceso.
+\end{quote}
+\vspace{.5cm}
