@@ -1,1 +1,17 @@
-\textbf{}
+\textbf{¿Cuántas posibles combinaciones no triviales existen para cifrar bytes con César, Decimado y Afin?}\\\\
+Primero nos surge la duda de que nos referimos con "no triviales", con eso en mente, vamos a intentar responder lo mejor posible. \\
+\textbf{Cifrado C\'esar}:
+\begin{enumerate}
+    \item Combinaciones no triviales: 255
+    \item Nuestro razonamiento es el siguiente, con 256 valores posibles (0-255) habr\'a 256 desplazamientos totales, excluimos el dezplazmaiento 0, trivial, nos quedan 255 \'utiles, en el alfabeto de 26 letras siguiendo la misma regla hay 25 desplazamientos utiles, , entonces para 256 simbolos, los que consideramos no triviales son 256-1=255 \citep{dCOde}
+\end{enumerate}
+\textbf{CifradoDecimado}
+\begin{enumerate}
+    \item COmbinaciones no triviales: 127
+    \item NUestro razonamiento, este cifrado usa la fórmula $C = aM \bmod 256$, donde $a$ debe ser coprimo con $256$. El número de enteros coprimos con $256$ es $\varphi(256)=128$. Excluyendo la clave trivial $a=1$ (identidad), quedan $128 - 1 = 127$ combinaciones no triviales. \citep{wikipedia_euler_totient_es}
+\end{enumerate}
+\textbf{Cifrado Af\'in}
+\begin{enumerate}
+    \item COmbinaciones no triviales: 32767
+    \item El cifrado afín usa la fórmula $C = aM + b \bmod 256$. Con $n=256$ hay $\varphi(256)=128$ valores posibles de $a$ (coprimos con $256$) y $256$ valores posibles para $b$, resultando en $128 \times 256 = 32768$ pares clave totales. Al excluir la clave identidad $(a=1, b=0)$, quedan $32768 - 1 = 32767$ combinaciones no triviales.\citep{Course_SideKick}
+\end{enumerate}
