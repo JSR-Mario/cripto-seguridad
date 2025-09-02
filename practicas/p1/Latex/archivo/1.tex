@@ -1,0 +1,40 @@
+\textbf{Descifrar el archivo file1.lol}
+\begin{quote}
+    Para el archivo \texttt{file1.lol} se comenzó inspeccionando su contenido binario en bruto,
+    mostrando tanto los primeros caracteres en ASCII como en hexadecimal. El resultado
+    no presentaba texto legible, sino bytes aparentemente aleatorios, lo que sugirió que se
+    trataba de un cifrado clásico sobre bytes y no de una simple codificación.
+
+    A continuación, se implementó un procedimiento en Python para probar de manera
+    automática los cifrados César, Decimado y Afín, utilizando fuerza bruta sobre todas sus
+    posibles claves. Una vez obtenido cada descifrado, se verificaba la cabecera con los
+    \textit{magic bytes} característicos de distintos formatos (PDF, PNG, MP3, MP4).
+
+    Para el caso del cifrado Afín, se utilizó la siguiente función que aplica la fórmula de
+    descifrado con aritmética modular en $Z_{256}$:
+
+    \vspace{.3cm}
+    \begin{verbatim}
+    def affine_decrypt(data, a, b):
+        try:
+            inv = pow(a, -1, 256)  # inverso modular de a
+        except ValueError:
+            return None
+    
+        result = bytearray()
+        for byte in data:
+            val = ((byte - b) * inv) % 256
+            result.append(val)
+        return result
+    \end{verbatim}
+    \vspace{.3cm}
+    
+    Tras las pruebas, se encontró que el método correcto era el \textbf{cifrado Afín} con
+    parámetros $a=143$ y $b=157$. El archivo resultante comenzaba con la secuencia
+    \texttt{0xFF 0xFB}, correspondiente al \textit{frame sync} de los archivos de audio MPEG
+    Layer III (\texttt{.mp3}), lo que confirmó el formato.
+
+    Una vez guardado el archivo descifrado, se verificó que podía reproducirse
+    correctamente como audio. Con esto se validó el éxito del proceso de descifrado.
+\end{quote}
+\vspace{.5cm}

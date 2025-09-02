@@ -1,1 +1,8 @@
-\textbf{}
+\textbf{Ya que \textit{base64} no es un cifrado, sino codificación, ¿en qué casos podemos usarlo?}\\
+
+Base64 nos sirve para representar datos binarios en texto ASCII, y esto es útil cuando un canal de comunicación unicamente permite caracteres imprimibles, los casos en los que sería útil usar Base64 son:
+\begin{itemize}
+    \item{Para transmitir datos binarios en canales de texto, por ejemplo enviar imágenes en correos electrónicos.}
+    \item{Para incluir datos binarios en un JSON o XML, por ejemplo incrustar una imagen un una respuesta JSON para un API.}
+    \item{Para Codificar datos para URLs, por ejemplo, evitar caracteres inválidos o reservados un una URL}
+\end{itemize}
