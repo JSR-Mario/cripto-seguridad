@@ -1,1 +1,28 @@
-\textbf{}
+\textbf{¿Por qué los archivos descifrados tienen exactamente el mismo tamaño antes de cifrar
+pero no pudimos leerlos? ¿Por qué no tuvimos que agregar/quitar nada?}
+
+\begin{quote}
+    Lo primero que hay que recordar es que estamos usando cifrados en donde reemplazamos o
+    reacomodamos la información original, por ejemplo con sustituciones 1 a 1 entre letras o en
+    el caso de base64 solo codificamos (aunque esto si aumenta el tamaño) porque usamos 4
+    caracteres por cada 3 bytes pero regresa al mismo tamaño al descifrar. \vspace{.3cm}
+
+    El que no se pueda leer es porque los programas que se utilizan para leer estos archivos
+    esperan cierto formato en los archivos, especialmente cuando ven la firma y buscan los magic
+    bytes para saber como leerlo, entonces al modificar las estructuras y los bytes que
+    utilizan para decodificarlo la información queda de cierta manera inutilizada.
+    \vspace{.3cm}
+
+    En cuanto a agregar a eliminar cosas vamos por casos:
+    \begin{enumerate}
+        \item César, Decimado, Afín: esto es sustitución monoalfabetica 1 a 1 por lo que el
+            tamaño no debe cambiar y no es necesario quitar o añadir nada.
+        \item B64: Esto como ya dijimos es una reacomodación de la información en bloques,
+            si se agrega el carácter de padding usualmente \texttt{=} pero al decodificar
+            se omite este mismo por lo que no se quita ni agrega nada.
+    \end{enumerate}
+
+    De manera concisa podríamos decir que las operaciones que usamos son biyectivas sobre el
+    conjunto de símbolos. 
+\end{quote}
+\vspace{.5cm}

@@ -1,1 +1,18 @@
-\textbf{}
+\textbf{¿Cuantos primos relativos hay en $\mathbb{Z}_{256}$?} \vspace{.3cm}
+
+\begin{quote}
+     Para responder esta pregunta voy a hacer uso de la
+     función $\phi$ de Euler \citep{wikipedia_euler_totient_es}. La función $\phi (n) $ cuando
+     $n=256=2^8$ cuenta la cantidad de enteros positivos menores o iguales a n que son
+     primos relativos con este mismo:
+
+     \begin{align*}
+         \phi(p^k) &= p^k - p^{k-1} \\
+         &= 2^8 - 2^7 \\
+         &= 256 - 128 \\
+         &= 128 \\
+     \end{align*}
+
+     Por tanto hay 128 enteros en el anillo que son primos relativos a $256$.
+\end{quote}
+\vspace{.5cm}
