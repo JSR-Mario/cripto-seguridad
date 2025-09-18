@@ -1,0 +1,44 @@
+\textbf{Elabora la demostración de que la prueba de divisibilidad entre 9 funciona}\vspace{.2cm}
+
+\textcolor{bibi}{Prueba de divisibilidad}
+\begin{quote}
+    Primero recordemos la prueba, la idea principal es la siguiente: Si quieres probar que un
+    numero n es divisible entre 9, toma los m dígitos de n, digamos $d_0,d_1 \dots d_m$ y los
+    sumas $d_0+d_1 +\dots+ d_m=n_1$, $n$ sera divisible entre 9 SII este nuevo número es
+    divisible entre 9. \vspace{.3cm}
+
+    \textbf{Ejemplo:}
+
+    $n=455981$, sumamos sus dígitos $4+5+5+9+8+1=32$ que no es divisible entre 9 y por tanto
+    $455981$ tampoco lo es. \vspace{.3cm}
+
+    $n=55931112$, sumamos todos sus dígitos $5+5+9+3+1+1+1+2=27$ que si es divisible entre 9 y
+    por tanto $55931112$ también lo es.
+\end{quote}
+
+\textcolor{bibi}{Demostración}
+\begin{quote}
+    Intente por inducción pero no me salio así que tuve que buscar una parte :c\dots
+
+    Una parte muy importante, es ver que estos dígitos no están sueltos, es decir, estos
+    describen a $n$ usando la siguiente ec:
+    \begin{align*}
+        n=d_m 10^m + d_{m-1} 10^{m-1} + \dots + d_1 10 + d_0 
+    \end{align*}
+
+    Ademas, vamos a usar congruencias; anotando lo siguiente: $a \equiv b \ (mod \ m)$ significa
+    m divide $a-b$, de aquí tenemos que $10 \equiv 1 \ (mod \ 9)$ y de la misma manera $10^i
+    \equiv 1^i \equiv 1 \ (mod \ 9)$. Ahora solo multiplicamos por el dígito:
+    \begin{align*}
+        d_i 10^i \equiv d_i 1 \equiv d_i \ (mod \ 9)
+    \end{align*}
+
+    Ahora lo hacemos para todos los dígitos de $n$:
+    \begin{align*}
+        n = \displaystyle\sum_{i=0}^{m} d_i 10^i \equiv \displaystyle\sum_{i=0}^{m} d_i \
+        (mod \ 9)
+    \end{align*}
+
+    Pero nota como la segunda parte de la ec. es la suma de los dígitos. Si uno es divisible
+    por 9 entonces el otro lo es. 
+\end{quote}
